@@ -1,0 +1,29 @@
+{
+  "name": "truncate-path",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "description": "Smart and effective path truncation.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "path",
+    "file",
+    "truncate",
+    "string",
+    "shorten",
+    "filename",
+    "fs",
+    "directory"
+  ],
+  "author": "Anthony Mugendi <ngurumugz@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mugendi/truncate-path.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mugendi/truncate-path/issues"
+  },
+  "homepage": "https://github.com/mugendi/truncate-path#readme"
+}
