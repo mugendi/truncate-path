@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/mugendi/truncate-path/issues"
   },
-  "homepage": "https://github.com/mugendi/truncate-path#readme"
+  "homepage": "https://github.com/mugendi/truncate-path#readme",
+  "dependencies": {
+    "is-url": "^1.2.4"
+  }
 }
