@@ -1,6 +1,6 @@
 {
   "name": "truncate-path",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "license": "MIT",
   "description": "Smart and effective path truncation.",
