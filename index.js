@@ -38,22 +38,39 @@ function truncate_path(filePath, length = 40) {
     }
 
     // make into array
-    arr = dir.split(sep).map((p) => (p == '' ? '/' : p));
+    arr = dir
+        .split(sep)
+        .map((p) => (p == '' ? '/' : p))
+        .reduce((a, b) => {
+            let l = a.length ? a.length - 1 : 0;
+            let v = a[l] || null;
 
-    let len = file.length,
-        n = 0,
+            if (v == sep) {
+                a[l] = a[l] + b;
+            } else {
+                a.push(b);
+            }
+
+            return a;
+        }, []);
+
+    let len = 0,
+        n = 1,
         p,
         arr2;
 
     length = length - file.length;
 
+    // console.log(length);
+
     for (p of arr) {
-        n++;
         if (len >= length) break;
         len += p.length;
+        n++;
     }
 
     arr2 = arr.slice(0, n);
+    
     if (n < arr.length - 1) arr2.push('[..]');
     arr2.push(file);
 
@@ -62,6 +79,7 @@ function truncate_path(filePath, length = 40) {
     if (is_url) {
         filePath = '//' + filePath;
     }
+
 
     return filePath;
 }
