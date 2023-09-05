@@ -1,11 +1,11 @@
 // Copyright 2021 Anthony Mugendi
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,33 +13,57 @@
 // limitations under the License.
 
 const path = require('path');
+const isUrl = require('is-url');
 
-function truncate_path(filePath, length = 20) {
+function truncate_path(filePath, length = 40) {
+    let file,
+        dir,
+        arr,
+        sep,
+        is_url = false;
 
-    let file = path.basename(filePath),
-        dir = path.dirname(filePath),
-        arr = dir.split(path.sep).map(p => p == '' ? '/' : p),
-        len = 0,
-        p, i, arr2;
+    if (isUrl(filePath)) {
+        is_url = true;
+
+        // parse url
+        let o = new URL(filePath);
+
+        dir = [o.hostname, path.dirname(o.pathname)].join('');
+        file = o.pathname.split('/').pop();
+        sep = '/';
+    } else {
+        file = path.basename(filePath);
+        dir = path.dirname(filePath);
+        sep = path.sep;
+    }
+
+    // make into array
+    arr = dir.split(sep).map((p) => (p == '' ? '/' : p));
+
+    let len = file.length,
+        n = 0,
+        p,
+        arr2;
 
     length = length - file.length;
 
-    for (i in arr) {
+    for (p of arr) {
+        n++;
         if (len >= length) break;
-        p = arr[i];
         len += p.length;
     }
 
-    arr2 = arr.slice(0, i)
-    if (i < arr.length - 1) arr2.push('[..]');
+    arr2 = arr.slice(0, n);
+    if (n < arr.length - 1) arr2.push('[..]');
     arr2.push(file);
 
-    console.log(arr2);
-    filePath = path.join(...arr2)
+    filePath = path.join(...arr2);
+
+    if (is_url) {
+        filePath = '//' + filePath;
+    }
 
     return filePath;
-
 }
-
 
 module.exports = truncate_path;
