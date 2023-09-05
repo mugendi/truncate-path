@@ -6,7 +6,7 @@ Sometimes you need to display truncated paths in your application. This module d
 ```javascript
 let truncatePath = require('truncate-path');
 
-let file = '/home/mugz/projects/node/my-modules/test-module/node_modules/chokidar/types/index.d.ts';
+let file = '/your/very/very/long/path-to/my-modules/test-module/node_modules/chokidar/types/index.d.ts';
 
 console.log("Local File:", truncatePath(file, 10));
 
